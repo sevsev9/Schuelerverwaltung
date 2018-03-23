@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxverwaltung.Main_ctr">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="316.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fxverwaltung.add.Add_ctr">
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="251.0" styleClass="root" stylesheets="@fx.css">
          <children>
@@ -19,7 +19,7 @@
             <Label alignment="CENTER_RIGHT" layoutX="23.0" layoutY="200.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="School:" />
             <Label alignment="CENTER_RIGHT" layoutX="23.0" layoutY="260.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="Class:" />
             <Label alignment="CENTER_RIGHT" layoutX="22.0" layoutY="230.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="E-Mail:" />
-            <Button     fx:id="add_btn"     layoutX="170.0" layoutY="327.0" mnemonicParsing="false"  prefHeight="41.0" prefWidth="126.0" text="ADD" />
+            <Button fx:id="add_btn" layoutX="170.0" layoutY="327.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="126.0" text="ADD" />
             <Label alignment="CENTER_RIGHT" layoutX="23.0" layoutY="290.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="Password:" />
             <PasswordField fx:id="add_passwd" layoutX="159.0" layoutY="293.0" />
             <TextField fx:id="add_class" layoutX="159.0" layoutY="263.0" />
