@@ -44,7 +44,7 @@
             <ImageView fx:id="student_image" fitHeight="114.0" fitWidth="214.0" layoutX="254.0" layoutY="110.0" pickOnBounds="true" preserveRatio="true" />
             <DatePicker fx:id="opt_date" layoutX="564.0" layoutY="307.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: lightgrey;" />
             <Label alignment="CENTER_RIGHT" layoutX="473.0" layoutY="307.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="Date of Birth" textAlignment="CENTER" />
-            <TextArea fx:id="student_data" layoutX="254.0" layoutY="230.0" prefHeight="207.0" prefWidth="214.0" style="-fx-border-color: grey;" />
+            <TextArea fx:id="student_data" editable="false" layoutX="254.0" layoutY="230.0" prefHeight="207.0" prefWidth="214.0" style="-fx-border-color: grey;" />
             <Button fx:id="student_add" layoutX="593.0" layoutY="394.0" mnemonicParsing="false" onAction="#add_student" stylesheets="@fx.css" text="Add Student" />
          </children>
       </AnchorPane>

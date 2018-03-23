@@ -8,11 +8,13 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.Collection;
+import java.util.TreeSet;
 
 public class Main_ctr {
     public ListView student_table;
@@ -40,10 +42,11 @@ public class Main_ctr {
     public TextField add_lname;
     public TextField add_fname;
     public DatePicker add_date;
+    public TextField add_uname;
+    public Button add_close;
 
 
-
-    Collection<Student> students = null;
+    private Collection<Student> students = null;
 
     //Search Variables
         //Primary:
@@ -61,7 +64,7 @@ public class Main_ctr {
 
 
     public Main_ctr() {
-
+        students = new TreeSet<>();
     }
 
     public void search(ActionEvent actionEvent) {
@@ -69,24 +72,30 @@ public class Main_ctr {
     }
 
     public void add_student(ActionEvent actionEvent) {
-        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("addstudent.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("./addstudent.fxml"));
             Stage stage = new Stage();
             stage.setTitle("Add Student");
-            stage.setScene(new Scene(root, 450, 450));
+            stage.setScene(new Scene(root));
             stage.show();
-            // Hide current Window
-            ((Node) (actionEvent.getSource())).getScene().getWindow().hide();
-
-            add_btn.setOnAction(new EventHandler<ActionEvent>() {
-                @Override
-                public void handle(ActionEvent event) {
-
-                }
-            });
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void add_btnaction(ActionEvent actionEvent) {
+        Student s = new Student(add_uname.getText(),add_passwd.getText(),add_fname.getText(), add_lname.getText(), add_class.getText(), add_email.getText(), add_date.getValue());
+
+        try {
+            System.out.print(s.toString());
+            students.add(s);
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+
+        Node src = (Node) actionEvent.getSource();
+        Stage stage = (Stage) src.getScene().getWindow();
+        stage.close();
+
     }
 }

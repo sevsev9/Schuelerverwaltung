@@ -3,6 +3,8 @@ package fxverwaltung;
 import javafx.scene.image.Image;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class Student implements Serializable, Comparable{
@@ -12,15 +14,26 @@ public class Student implements Serializable, Comparable{
     private String last_name;
     private String class_;
     private String email;
+    private LocalDate date;
     private Image profilePic;
 
-    public Student(String username, String password, String first_name, String last_name, String class_, String email) {
+    public Student(String username, String password, String first_name, String last_name, String class_, String email, LocalDate date) {
         this.username = username;
         this.password = password;
         this.first_name = first_name;
         this.last_name = last_name;
         this.class_ = class_;
         this.email = email;
+        this.date = date;
+
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public String getUsername() {
@@ -81,13 +94,13 @@ public class Student implements Serializable, Comparable{
 
     @Override
     public String toString() {
-        return  "-----------------------------\n" +
-                "\n Username   =" + username +
-                "\n First Name =" + first_name +
-                "\n Last Name  =" + last_name  +
-                "\n Class      =" + class_ +
-                "\n E-mail     =" + email +
-                "-----------------------------\n";
+        return  "-----------------------------" +
+                "\n Username   = " + username +
+                "\n First Name = " + first_name +
+                "\n Last Name  = " + last_name  +
+                "\n Class      = " + class_ +
+                "\n E-mail     = " + email +
+                "\n----------------------------\n";
     }
 
     @Override
