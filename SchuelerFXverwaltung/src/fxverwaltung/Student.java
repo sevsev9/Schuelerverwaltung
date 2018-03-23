@@ -2,7 +2,10 @@ package fxverwaltung;
 
 import javafx.scene.image.Image;
 
-public class Student {
+import java.io.Serializable;
+import java.util.Objects;
+
+public class Student implements Serializable, Comparable{
     private String username;
     private String password;
     private String first_name;
@@ -85,5 +88,34 @@ public class Student {
                 "\n Class      =" + class_ +
                 "\n E-mail     =" + email +
                 "-----------------------------\n";
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        if (o.getClass() != this.getClass()) {
+            return -1;
+        }
+        Student s = (Student) o;
+        return s.getFirst_name().compareToIgnoreCase(this.getFirst_name()) + s.getLast_name().compareToIgnoreCase(this.getLast_name()) + s.getEmail().compareToIgnoreCase(this.getEmail()) + s.getUsername().compareToIgnoreCase(this.getUsername());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Student student = (Student) o;
+        return Objects.equals(username, student.username) &&
+                Objects.equals(password, student.password) &&
+                Objects.equals(first_name, student.first_name) &&
+                Objects.equals(last_name, student.last_name) &&
+                Objects.equals(class_, student.class_) &&
+                Objects.equals(email, student.email) &&
+                Objects.equals(profilePic, student.profilePic);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(username, password, first_name, last_name, class_, email, profilePic);
     }
 }
