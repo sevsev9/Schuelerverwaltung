@@ -108,13 +108,58 @@ public class Main_ctr {
             if (opt_class != null) { val.add(opt_class.getText()); } else {val.add("0");}
             if (opt_date.getValue() != null) {  val.add(opt_date.getValue().toString()); } else {val.add("0");}
 
-            /*for (int i = 0; i<7; i++) {
+            for (int i = 0; i<7; i++) {
                 for (Student s: students) {
-                    if ( s.get) {
+                    int mctr = 0; //Match Counter
+                    int nlctr = 7; //Null Counter
+                    double percentage = 0;      //Calculate Percentage of match
 
+                    if (!val.get(0).equals("0")) {
+                        if (s.getFirst_name().equals(val.get(0))) {
+                            mctr++;
+                            nlctr--;
+                        }
                     }
+                    if (!val.get(1).equals("0")) {
+                        if (s.getLast_name().equals(val.get(1))){
+                            mctr++;
+                            nlctr--;
+                        }
+                    }
+                    if (!val.get(2).equals("0")) {
+                        if (s.getUsername().equals(val.get(2))){
+                            mctr++;
+                            nlctr--;
+                        }
+                    }
+                    if (!val.get(3).equals("0")) {
+                        if (s.getEmail().equals(val.get(3))){
+                            mctr++;
+                            nlctr--;
+                        }
+                    }
+                    if (!val.get(4).equals("0")) {
+                        if (s.getSchool().equals(val.get(3))){
+                            mctr++;
+                            nlctr--;
+                        }
+                    }
+                    if (!val.get(5).equals("0")) {
+                        if (s.getClass_().equals(val.get(3))){
+                            mctr++;
+                            nlctr--;
+                        }
+                    }
+                    if (!val.get(6).equals("0")) {
+                        if (s.getDate().equals(LocalDate.parse(val.get(3)))){
+                            mctr++;
+                            nlctr--;
+                        }
+                    }
+
+
                 }
-            }*/
+            }
 
     }
 
@@ -132,7 +177,7 @@ public class Main_ctr {
     }
 
     public void add_btnaction(ActionEvent actionEvent) {
-        Student s = new Student(add_uname.getText(),add_passwd.getText(),add_fname.getText(), add_lname.getText(), add_class.getText(), add_email.getText(), add_date.getValue());
+        Student s = new Student(add_fname.getText(), add_lname.getText(), add_uname.getText(), add_email.getText(), add_class.getText(), add_school.getText(), add_date.getValue(), add_passwd.getText());
 
         try {
             System.out.print(s.toString());

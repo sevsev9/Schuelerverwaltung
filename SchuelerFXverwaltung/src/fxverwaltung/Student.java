@@ -14,10 +14,13 @@ public class Student implements Serializable, Comparable{
     private String last_name;
     private String class_;
     private String email;
+    private String school;
     private LocalDate date;
     private Image profilePic;
 
-    public Student(String username, String password, String first_name, String last_name, String class_, String email, LocalDate date) {
+
+
+    public Student(String first_name, String last_name, String username, String email, String class_, String school, LocalDate date, String password) {
         this.username = username;
         this.password = password;
         this.first_name = first_name;
@@ -25,6 +28,16 @@ public class Student implements Serializable, Comparable{
         this.class_ = class_;
         this.email = email;
         this.date = date;
+        this.school = school;
+
+    }
+
+    public String getSchool() {
+        return school;
+    }
+
+    public void setSchool(String school) {
+        this.school = school;
     }
 
     public LocalDate getDate() {
@@ -109,7 +122,7 @@ public class Student implements Serializable, Comparable{
             return -1;
         }
         Student s = (Student) o;
-        return s.getFirst_name().compareToIgnoreCase(this.getFirst_name()) + s.getLast_name().compareToIgnoreCase(this.getLast_name()) + s.getEmail().compareToIgnoreCase(this.getEmail()) + s.getUsername().compareToIgnoreCase(this.getUsername());
+        return s.getFirst_name().compareToIgnoreCase(this.getFirst_name()) + s.getLast_name().compareToIgnoreCase(this.getLast_name()) + s.getEmail().compareToIgnoreCase(this.getEmail()) + s.getUsername().compareToIgnoreCase(this.getUsername()) + s.getSchool().compareToIgnoreCase(this.getSchool());
     }
 
     @Override
@@ -123,12 +136,13 @@ public class Student implements Serializable, Comparable{
                 Objects.equals(last_name, student.last_name) &&
                 Objects.equals(class_, student.class_) &&
                 Objects.equals(email, student.email) &&
-                Objects.equals(profilePic, student.profilePic);
+                Objects.equals(profilePic, student.profilePic) &&
+                Objects.equals(school, student.school);
     }
 
     @Override
     public int hashCode() {
 
-        return Objects.hash(username, password, first_name, last_name, class_, email, profilePic);
+        return Objects.hash(username, password, first_name, last_name, class_, email, profilePic, school);
     }
 }
