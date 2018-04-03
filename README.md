@@ -1,7 +1,7 @@
 # Schülerverwaltung w/ JavaFX
 Developers:
 * [sevsev9](https://github.com/sevsev9) 
-* [Julian Mehlig](https://github.com/Julianmehlig) 
+* [Fruewirth](https://github.com/Fruehwirth) 
 
 ## Getting Started
 
