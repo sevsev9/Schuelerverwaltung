@@ -25,7 +25,6 @@ public class Student implements Serializable, Comparable{
         this.class_ = class_;
         this.email = email;
         this.date = date;
-
     }
 
     public LocalDate getDate() {
@@ -100,7 +99,8 @@ public class Student implements Serializable, Comparable{
                 "\n Last Name  = " + last_name  +
                 "\n Class      = " + class_ +
                 "\n E-mail     = " + email +
-                "\n----------------------------\n";
+                "\n Date       = " + date +
+                "\n-----------------------------\n";
     }
 
     @Override
