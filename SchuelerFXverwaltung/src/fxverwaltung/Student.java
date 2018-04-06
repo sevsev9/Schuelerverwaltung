@@ -106,14 +106,7 @@ public class Student implements Serializable, Comparable{
 
     @Override
     public String toString() {
-        return  "-----------------------------" +
-                "\n Username   = " + username +
-                "\n First Name = " + first_name +
-                "\n Last Name  = " + last_name  +
-                "\n Class      = " + class_ +
-                "\n E-mail     = " + email +
-                "\n Date       = " + date +
-                "\n-----------------------------\n";
+        return  first_name + " " + last_name;
     }
 
     @Override

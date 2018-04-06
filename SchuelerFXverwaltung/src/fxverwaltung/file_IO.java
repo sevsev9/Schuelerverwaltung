@@ -51,12 +51,12 @@ public class file_IO {
 
     private Student parseString(String line) {
         String[] values = line.split("[,;]");
-        return new Student(values[0], values[1], values[2], values[3], values[4], values[5], LocalDate.parse(values[6]));
+        return new Student(values[0], values[1], values[2], values[3], values[4], values[5], LocalDate.parse(values[6]),values[7]);
     }
 
     public Student parseLineScanner(String Line) {
         Scanner sc = new Scanner(Line);
         sc.useDelimiter("[,;]");
-        return new Student(sc.next(),sc.next(),sc.next(),sc.next(), sc.next(), sc.next(), LocalDate.parse(sc.next()));
+        return new Student(sc.next(),sc.next(),sc.next(),sc.next(), sc.next(), sc.next(), LocalDate.parse(sc.next()),sc.next());
     }
 }

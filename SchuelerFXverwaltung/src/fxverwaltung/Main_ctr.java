@@ -12,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -31,7 +32,7 @@ public class Main_ctr {
     public ImageView headerimg;
     public ImageView student_image;
     public TextArea student_data;
-    Image img = new Image("file:sample_student.png");
+    private Image SampleStudent = new Image(Main.class.getResourceAsStream("sample_student.png"));
 
     //Optional search fields
     public TextField opt_lname;
@@ -53,7 +54,7 @@ public class Main_ctr {
     public TextField add_uname;
     public Button add_close;
 
-    private ObservableList<String> osl = null;
+    private static ObservableList<Student> osl = FXCollections.observableArrayList();
     private Collection<Student> students = new TreeSet<>();
     private ArrayList<String> names = new ArrayList<>();
 
@@ -77,7 +78,15 @@ public class Main_ctr {
         value_option.getSelectionModel().selectedIndexProperty().addListener(voCL);
         value_option.setTooltip(new Tooltip("Select Value to Search for"));
         date_bar.setMaxWidth(search_bar.getLayoutX());
-        student_image.setImage(img);
+        student_image.setImage(SampleStudent);
+        osl.add(new Student("Max", "Mustermann", "Sample", "example@email.com", "Klasse", "Schule", null, "password"));
+        student_table.setItems(osl);
+    }
+
+    public void check4select(ActionEvent actionEvent) {
+        int i = student_table.getSelectionModel().getSelectedIndex();
+        System.out.println(i);
+
     }
 
 
@@ -157,7 +166,6 @@ public class Main_ctr {
                         }
                     }
 
-
                 }
             }
 
@@ -177,17 +185,27 @@ public class Main_ctr {
     }
 
     public void add_btnaction(ActionEvent actionEvent) {
+        if (    add_fname.getText() == null ||
+                add_lname.getText() == null ||
+                add_uname.getText() == null ||
+                add_email.getText() == null ||
+                add_class.getText() == null ||
+                add_school.getText() == null ||
+                add_date.getValue() == null ||
+                add_passwd.getText() == null) {
+
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setHeaderText("Please insert a value!");
+            alert.setContentText("Values can't be null");
+            alert.showAndWait();
+            return;
+        }
+
         Student s = new Student(add_fname.getText(), add_lname.getText(), add_uname.getText(), add_email.getText(), add_class.getText(), add_school.getText(), add_date.getValue(), add_passwd.getText());
 
-        try {
-            System.out.print(s.toString());
-            students.add(s);
-            names.add(s.getFirst_name() + " " + s.getLast_name());
-            osl = FXCollections.observableArrayList(names);
-            student_table.setItems(osl);
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
+        students.add(s);
+        osl.add(s);
 
         Node src = (Node) actionEvent.getSource();
         Stage stage = (Stage) src.getScene().getWindow();
@@ -195,10 +213,10 @@ public class Main_ctr {
     }
 
     public void setStudent_image (Image image){
-
+        this.student_image.setImage(image);
     }
 
     public void refresh_list() {
-
+        student_table.setItems(osl);
     }
 }

@@ -12,6 +12,15 @@
    <children>
       <AnchorPane prefHeight="400.0" prefWidth="251.0" styleClass="root" stylesheets="@fx.css">
          <children>
+            <TextField fx:id="add_uname" layoutX="155.0" layoutY="83.0" />
+            <TextField fx:id="add_fname" layoutX="156.0" layoutY="112.0" />
+            <TextField fx:id="add_lname" layoutX="156.0" layoutY="142.0" />
+            <DatePicker fx:id="add_date" layoutX="155.0" layoutY="173.0" prefHeight="25.0" prefWidth="149.0" />
+            <TextField fx:id="add_school" layoutX="156.0" layoutY="203.0" />
+            <TextField fx:id="add_email" layoutX="156.0" layoutY="233.0" />
+            <TextField fx:id="add_class" layoutX="156.0" layoutY="263.0" />
+            <PasswordField fx:id="add_passwd" layoutX="156.0" layoutY="293.0" />
+            <Button fx:id="add_btn" layoutX="168.0" layoutY="328.0" mnemonicParsing="false" onAction="#add_btnaction" prefHeight="41.0" prefWidth="126.0" text="ADD" />
             <Label alignment="CENTER" layoutX="23.0" layoutY="14.0" prefHeight="47.0" prefWidth="270.0" styleClass="header" stylesheets="@fx.css" text="Add Student" />
             <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="110.0" prefHeight="30.0" prefWidth="115.0" styleClass="adder_label" text="First Name:" />
             <Label alignment="CENTER_RIGHT" layoutX="25.0" layoutY="140.0" prefHeight="30.0" prefWidth="115.0" styleClass="adder_label" text="Last Name:" />
@@ -20,16 +29,7 @@
             <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="261.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="Class:" />
             <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="231.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="E-Mail:" />
             <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="291.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="Password:" />
-            <Button fx:id="add_btn" onAction="#add_btnaction" layoutX="170.0" layoutY="327.0" mnemonicParsing="false" prefHeight="41.0" prefWidth="126.0" text="ADD" />
-            <PasswordField fx:id="add_passwd" layoutX="156.0" layoutY="293.0" />
-            <TextField fx:id="add_class" layoutX="156.0" layoutY="263.0" />
-            <TextField fx:id="add_email" layoutX="156.0" layoutY="233.0" />
-            <TextField fx:id="add_school" layoutX="156.0" layoutY="203.0" />
-            <TextField fx:id="add_lname" layoutX="156.0" layoutY="142.0" />
-            <TextField fx:id="add_fname" layoutX="156.0" layoutY="112.0" />
-            <DatePicker fx:id="add_date" layoutX="155.0" layoutY="173.0" prefHeight="25.0" prefWidth="149.0" />
             <Label alignment="CENTER_RIGHT" layoutX="15.0" layoutY="80.0" prefHeight="30.0" prefWidth="126.0" styleClass="adder_label" text="Username:" />
-            <TextField fx:id="add_uname" layoutX="155.0" layoutY="83.0" />
          </children>
       </AnchorPane>
    </children>
