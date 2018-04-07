@@ -34,3 +34,32 @@
     -fx-text-fill: #999999;
     -fx-effect: dropshadow( gaussian , rgba(173, 0, 0, 0.5), 0,0,0,1 );
 }
+
+.root {
+    -fx-background-color: #222;
+}
+
+.menu-bar {
+    -fx-background-color: #007fa8;
+}
+
+.menu-item {
+    -fx-background-color: #222;
+    -fx-text-fill: lightgrey;
+}
+
+.menu-item:hover {
+    -fx-background-color: #3399B9;
+}
+
+.menu-item:pressed {
+    -fx-background-color: #004C65;
+}
+
+.context-menu {
+    -fx-background-color: #007fa8;
+}
+
+.root.popup {
+    -fx-background-color: transparent;
+}

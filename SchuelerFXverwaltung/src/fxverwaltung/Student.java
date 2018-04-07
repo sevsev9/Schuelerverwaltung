@@ -16,7 +16,7 @@ public class Student implements Serializable, Comparable{
     private String email;
     private String school;
     private LocalDate date;
-    private Image profilePic;
+    private int imgID;
 
 
 
@@ -29,11 +29,18 @@ public class Student implements Serializable, Comparable{
         this.email = email;
         this.date = date;
         this.school = school;
-
     }
 
     public String getSchool() {
         return school;
+    }
+
+    public int getImg() {
+        return imgID;
+    }
+
+    public void setImg(int imgID) {
+        this.imgID = imgID;
     }
 
     public void setSchool(String school) {
@@ -96,13 +103,6 @@ public class Student implements Serializable, Comparable{
         this.email = email;
     }
 
-    public Image getProfilePic() {
-        return profilePic;
-    }
-
-    public void setProfilePic(Image profilePic) {
-        this.profilePic = profilePic;
-    }
 
     @Override
     public String toString() {
@@ -129,13 +129,15 @@ public class Student implements Serializable, Comparable{
                 Objects.equals(last_name, student.last_name) &&
                 Objects.equals(class_, student.class_) &&
                 Objects.equals(email, student.email) &&
-                Objects.equals(profilePic, student.profilePic) &&
                 Objects.equals(school, student.school);
     }
 
     @Override
     public int hashCode() {
+        return Objects.hash(username, password, first_name, last_name, class_, email, school);
+    }
 
-        return Objects.hash(username, password, first_name, last_name, class_, email, profilePic, school);
+    public String toCSV(char seperator) {
+        return first_name + seperator + last_name + seperator + username + seperator + email + seperator + school + seperator + class_ + seperator + date;
     }
 }

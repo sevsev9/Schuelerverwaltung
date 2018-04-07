@@ -7,21 +7,14 @@ import java.util.Collection;
 import java.util.Scanner;
 
 public class file_IO {
-    private String src = null;
     private File srcfile = null;
     private ArrayList<String> readsrc = new ArrayList<>();
     private String in = null;
 
-    public file_IO(String src) {
-        this.src = src;
-    }
-
-    public file_IO(File srcfile) {
-        this.srcfile = srcfile;
-    }
+    public file_IO() {}
 
 
-    public Collection<Student> readCSV() throws FileNotFoundException, IOException {
+    public Collection<Student> readCSV(String src) throws FileNotFoundException, IOException {
         Collection<Student> persons = new ArrayList<>();
 
         try (
@@ -45,8 +38,33 @@ public class file_IO {
         return persons;
     }
 
-    public void writeCSV(Collection<Student> s) throws FileNotFoundException, IOException{
+    public void writeCSV(Collection<Student> s, String path) throws FileNotFoundException, IOException{
+        try (
+                PrintWriter pw = new PrintWriter(new BufferedWriter(new FileWriter(path)))
+                ){
+            pw.println("First Name, Last Name, Username, Email, School, Class, Date, Password");
+            for (Student c:s) {
+                pw.println(c.toCSV(','));
+            }
+        }
 
+
+    }
+
+    public void writeLocal(String path, Collection<Student> students)  throws FileNotFoundException, IOException{
+        try (
+                ObjectOutputStream os = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(path)))
+                ){
+            os.writeObject(students);
+        }
+    }
+
+    public Collection<Student> readLocal(String path)  throws FileNotFoundException, IOException, ClassNotFoundException{
+        try (
+                ObjectInputStream is = new ObjectInputStream(new BufferedInputStream(new FileInputStream(path)))
+        ){
+            return ((Collection<Student>) is.readObject());
+        }
     }
 
     private Student parseString(String line) {

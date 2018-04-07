@@ -15,6 +15,8 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.Background;
 import javafx.stage.Stage;
 
+import java.awt.image.BufferedImage;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,7 +34,24 @@ public class Main_ctr {
     public ImageView headerimg;
     public ImageView student_image;
     public TextArea student_data;
+    public Button student_add;
     private Image SampleStudent = new Image(Main.class.getResourceAsStream("sample_student.png"));
+
+    //Menu Items
+    public MenuItem menu_overwritefromCSV;
+    public MenuItem menu_appendfromCSV;
+    public MenuItem menu_savelocal;
+    public MenuItem menu_savetocsv;
+    public MenuItem btn_about;
+
+    //Edit Fields
+    public TextField ch_fname;
+    public TextField ch_lname;
+    public TextField ch_uname;
+    public TextField ch_email;
+    public TextField ch_class;
+    public DatePicker ch_date;
+    public TextField ch_school;
 
     //Optional search fields
     public TextField opt_lname;
@@ -57,6 +76,10 @@ public class Main_ctr {
     private static ObservableList<Student> osl = FXCollections.observableArrayList();
     private Collection<Student> students = new TreeSet<>();
     private ArrayList<String> names = new ArrayList<>();
+    private ArrayList<Image> img = new ArrayList<>();   //Sample = 0 ... Max Mustermann = 1
+    private int imgctr;
+
+    private file_IO file_io = new file_IO();
 
 
     private ChangeListener<Number> voCL = new ChangeListener<Number>() {
@@ -74,13 +97,54 @@ public class Main_ctr {
     };
 
     public void init() {
+        //Max Mustermann
+        Image max = new Image(Main.class.getResourceAsStream("max.jpg"));
+        Student maxmustermann = new Student("Max", "Mustermann", "Sample", "example@email.com", "Klasse", "Schule", null, "password");
+        img.add(SampleStudent);
+        img.add(max);
+        maxmustermann.setImg(0);
+
         value_option.setItems(FXCollections.observableArrayList("First Name", "Last Name", "Username", "E-Mail", "School", "Class", "Date of Birth"));
         value_option.getSelectionModel().selectedIndexProperty().addListener(voCL);
         value_option.setTooltip(new Tooltip("Select Value to Search for"));
+
         date_bar.setMaxWidth(search_bar.getLayoutX());
         student_image.setImage(SampleStudent);
-        osl.add(new Student("Max", "Mustermann", "Sample", "example@email.com", "Klasse", "Schule", null, "password"));
+        //jaxrs!!!!
+
+        //Load Contents if available !!@TODO Get Reading to Work!! //Maby dont add students only to observable list
+        try {
+            students = file_io.readLocal("./seas.bin");
+            System.out.println(students);
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        osl.add(maxmustermann);
+        students.add(maxmustermann);
         student_table.setItems(osl);
+        student_table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
+            @Override
+            public void changed(ObservableValue observable, Object oldValue, Object newValue) {
+                Student s = (Student) newValue;
+                ch_fname.setText(s.getFirst_name());
+                ch_lname.setText(s.getLast_name());
+                ch_uname.setText(s.getUsername());
+                ch_email.setText(s.getEmail());
+                ch_school.setText(s.getSchool());
+                ch_class.setText(s.getClass_());
+                ch_date.setValue(LocalDate.of(1999,1,1));
+
+                if (s.getProfilePic() != null){
+                    student_image.setImage(s.getProfilePic());
+                } else {
+                    student_image.setImage(SampleStudent);
+                }
+
+            }
+        });
     }
 
     public void check4select(ActionEvent actionEvent) {
@@ -207,6 +271,7 @@ public class Main_ctr {
         students.add(s);
         osl.add(s);
 
+
         Node src = (Node) actionEvent.getSource();
         Stage stage = (Stage) src.getScene().getWindow();
         stage.close();  //closes window
@@ -218,5 +283,29 @@ public class Main_ctr {
 
     public void refresh_list() {
         student_table.setItems(osl);
+    }
+
+    public void savetoCSV() {
+
+    }
+
+    public void savelocal() {
+        try {
+            file_io.writeLocal("./seas.bin",students);
+            System.out.println("saved");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void openabout() {
+
+    }
+
+    public void read_overwrite_CSV(ActionEvent actionEvent) {
+
+    }
+
+    public void read_append_CSV(ActionEvent actionEvent) {
     }
 }
