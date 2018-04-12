@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+
+<VBox maxHeight="-Infinity" fx:controller="fxverwaltung.Main_ctr" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="342.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <children>
+        <AnchorPane prefHeight="402.0" prefWidth="600.0" stylesheets="@fx.css">
+            <children>
+                <Button layoutX="222.0" layoutY="327.0" mnemonicParsing="false" text="Set Password" />
+                <PasswordField layoutX="14.0" layoutY="332.0" prefHeight="25.0" prefWidth="197.0" />
+                <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" prefHeight="54.0" prefWidth="311.0" text="Change Student Password">
+                    <font>
+                        <Font name="System Bold" size="24.0" />
+                    </font>
+                </Label>
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="86.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="First Name:" textAlignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="111.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Last Name:" textAlignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="136.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="E-Mail:" textAlignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="161.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Username:" textAlignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="213.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Class:" textAlignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="188.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="School:" textAlignment="CENTER" />
+                <Label alignment="CENTER_RIGHT" layoutX="61.0" layoutY="238.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Date of Birth:" textAlignment="CENTER" />
+                <Label fx:id="img_fname" alignment="CENTER" layoutX="170.0" layoutY="86.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+                <Label fx:id="img_lname" alignment="CENTER" layoutX="170.0" layoutY="111.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+                <Label fx:id="img_mail" alignment="CENTER" layoutX="170.0" layoutY="136.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+                <Label fx:id="img_uname" alignment="CENTER" layoutX="170.0" layoutY="161.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+                <Label fx:id="img_school" alignment="CENTER" layoutX="170.0" layoutY="188.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+                <Label fx:id="img_class" alignment="CENTER" layoutX="170.0" layoutY="213.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+                <Label fx:id="img_date" alignment="CENTER" layoutX="170.0" layoutY="238.0" prefHeight="25.0" prefWidth="115.0" text="Label" textAlignment="CENTER" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

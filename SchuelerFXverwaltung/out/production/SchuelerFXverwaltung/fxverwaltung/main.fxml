@@ -79,9 +79,9 @@
             <TextField fx:id="ch_class" layoutX="342.0" layoutY="384.0" prefWidth="149.0" style="-fx-background-color: lightgrey;" />
             <TextField fx:id="ch_school" layoutX="342.0" layoutY="411.0" style="-fx-background-color: lightgrey;" />
             <DatePicker fx:id="ch_date" layoutX="342.0" layoutY="438.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: lightgrey;" />
-            <Button layoutX="417.0" layoutY="471.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="79.0" text="Save" />
-            <Button layoutX="237.0" layoutY="471.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="141.0" text="Change Password" />
-            <Button layoutX="237.0" layoutY="233.0" mnemonicParsing="false" text="Set Image" />
+            <Button fx:id="ch_save" layoutX="417.0" layoutY="471.0" mnemonicParsing="false" onAction="#ch_save" prefHeight="35.0" prefWidth="79.0" text="Save" />
+            <Button fx:id="ch_btn_pwd" layoutX="237.0" layoutY="471.0" mnemonicParsing="false" onAction="#ch_pass" prefHeight="35.0" prefWidth="141.0" text="Change Password" />
+            <Button fx:id="ch_setImg" layoutX="237.0" layoutY="233.0" mnemonicParsing="false" onAction="#setCurrentImg" text="Set Image" />
          </children>
       </AnchorPane>
    </children>

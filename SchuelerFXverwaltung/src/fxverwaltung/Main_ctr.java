@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.awt.image.BufferedImage;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InvalidClassException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -35,6 +36,23 @@ public class Main_ctr {
     public ImageView student_image;
     public TextArea student_data;
     public Button student_add;
+    public Button ch_save;
+    public Button ch_btn_pwd;
+    public Button ch_setImg;
+    public Label pwd_fname;
+    public Label pwd_lname;
+    public Label pwd_mail;
+    public Label pwd_uname;
+    public Label pwd_school;
+    public Label pwd_class;
+    public Label pwd_date;
+    public Label img_fname;
+    public Label img_lname;
+    public Label img_mail;
+    public Label img_uname;
+    public Label img_school;
+    public Label img_class;
+    public Label img_date;
     private Image SampleStudent = new Image(Main.class.getResourceAsStream("sample_student.png"));
 
     //Menu Items
@@ -74,10 +92,11 @@ public class Main_ctr {
     public Button add_close;
 
     private static ObservableList<Student> osl = FXCollections.observableArrayList();
-    private Collection<Student> students = new TreeSet<>();
+    private static Collection<Student> students = new TreeSet<>();
     private ArrayList<String> names = new ArrayList<>();
     private ArrayList<Image> img = new ArrayList<>();   //Sample = 0 ... Max Mustermann = 1
     private int imgctr;
+    private Student curr_std = null;
 
     private file_IO file_io = new file_IO();
 
@@ -97,12 +116,11 @@ public class Main_ctr {
     };
 
     public void init() {
-        //Max Mustermann
+        //Image Ressources
         Image max = new Image(Main.class.getResourceAsStream("max.jpg"));
-        Student maxmustermann = new Student("Max", "Mustermann", "Sample", "example@email.com", "Klasse", "Schule", null, "password");
         img.add(SampleStudent);
         img.add(max);
-        maxmustermann.setImg(0);
+
 
         value_option.setItems(FXCollections.observableArrayList("First Name", "Last Name", "Username", "E-Mail", "School", "Class", "Date of Birth"));
         value_option.getSelectionModel().selectedIndexProperty().addListener(voCL);
@@ -114,21 +132,32 @@ public class Main_ctr {
 
         //Load Contents if available !!@TODO Get Reading to Work!! //Maby dont add students only to observable list
         try {
-            students = file_io.readLocal("./seas.bin");
+            students.addAll(file_io.readLocal("./seas.bin"));
+            osl.addAll(students);
             System.out.println(students);
+        } catch (InvalidClassException e) {
+            System.out.println("Invalid Class (File not Found)");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        osl.add(maxmustermann);
-        students.add(maxmustermann);
+        if (students.isEmpty()) {
+            //Max Mustermann
+            Student maxmustermann = new Student("Max", "Mustermann", "Sample", "example@email.com", "Klasse", "Schule", null, "password");
+            maxmustermann.setImg(1);
+
+            osl.add(maxmustermann);
+            students.add(maxmustermann);
+        }
+
         student_table.setItems(osl);
         student_table.getSelectionModel().selectedItemProperty().addListener(new ChangeListener() {
             @Override
             public void changed(ObservableValue observable, Object oldValue, Object newValue) {
                 Student s = (Student) newValue;
+                curr_std = s;
                 ch_fname.setText(s.getFirst_name());
                 ch_lname.setText(s.getLast_name());
                 ch_uname.setText(s.getUsername());
@@ -137,8 +166,8 @@ public class Main_ctr {
                 ch_class.setText(s.getClass_());
                 ch_date.setValue(LocalDate.of(1999,1,1));
 
-                if (s.getProfilePic() != null){
-                    student_image.setImage(s.getProfilePic());
+                if (img.get(s.getImg()) != null){
+                    student_image.setImage(img.get(s.getImg()));
                 } else {
                     student_image.setImage(SampleStudent);
                 }
@@ -271,7 +300,6 @@ public class Main_ctr {
         students.add(s);
         osl.add(s);
 
-
         Node src = (Node) actionEvent.getSource();
         Stage stage = (Stage) src.getScene().getWindow();
         stage.close();  //closes window
@@ -281,6 +309,7 @@ public class Main_ctr {
         this.student_image.setImage(image);
     }
 
+    @Deprecated
     public void refresh_list() {
         student_table.setItems(osl);
     }
@@ -307,5 +336,53 @@ public class Main_ctr {
     }
 
     public void read_append_CSV(ActionEvent actionEvent) {
+    }
+
+    public void ch_save(ActionEvent actionEvent) {
+
+    }
+
+    public void ch_pass(ActionEvent actionEvent) {
+        if (curr_std != null) {
+            try {
+                Parent root = FXMLLoader.load(getClass().getResource("./addstudent.fxml"));
+                Stage stage = new Stage();
+                stage.setTitle("Set Student Image");
+                stage.setScene(new Scene(root));
+                stage.show();
+
+                pwd_fname.setText(curr_std.getFirst_name());
+                pwd_lname.setText(curr_std.getLast_name());
+                pwd_mail.setText(curr_std.getEmail());
+                pwd_uname.setText(curr_std.getUsername());
+                pwd_school.setText(curr_std.getSchool());
+                pwd_class.setText(curr_std.getClass_());
+                pwd_date.setText(curr_std.getDate().toString());
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.exit(0);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Student selected!");
+            alert.setContentText("Please select a Student.");
+            alert.showAndWait();
+        }
+    }
+
+    public void setCurrentImg(ActionEvent actionEvent) {
+        if (curr_std != null) {
+            try {
+
+            } catch (IOException e){
+                e.printStackTrace();
+                System.exit(0);
+            }
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("No Student selected!");
+            alert.setContentText("Please select a Student.");
+            alert.showAndWait();
+        }
     }
 }
