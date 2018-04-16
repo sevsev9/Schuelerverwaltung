@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/95_Fibonacci.iml" filepath="$PROJECT_DIR$/95_Fibonacci.iml" />
+      <module fileurl="file://$PROJECT_DIR$/95_Recursive.iml" filepath="$PROJECT_DIR$/95_Recursive.iml" />
     </modules>
   </component>
 </project>
