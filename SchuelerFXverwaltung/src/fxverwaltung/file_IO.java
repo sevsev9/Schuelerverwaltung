@@ -1,5 +1,7 @@
 package fxverwaltung;
 
+import javafx.scene.image.Image;
+
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -76,5 +78,25 @@ public class file_IO {
         Scanner sc = new Scanner(Line);
         sc.useDelimiter("[,;]");
         return new Student(sc.next(),sc.next(),sc.next(),sc.next(), sc.next(), sc.next(), LocalDate.parse(sc.next()),sc.next());
+    }
+
+    public ArrayList<Image> loadImg() throws IOException, ClassNotFoundException{
+        ArrayList<Image> img = new ArrayList<>();
+
+        try (
+                ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("svw_img.bin")))
+                ){
+                img = (ArrayList<Image>) ois.readObject();
+        }
+
+        return img;
+    }
+
+    public void saveImg(ArrayList<Image> img) throws IOException{
+        try (
+                ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("svw_img")))
+                ){
+                oos.writeObject(img);
+        }
     }
 }

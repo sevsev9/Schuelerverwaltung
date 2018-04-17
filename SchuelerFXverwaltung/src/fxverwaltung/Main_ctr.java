@@ -4,6 +4,7 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -12,11 +13,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
-import java.io.FileNotFoundException;
+import java.io.File;
 import java.io.IOException;
 import java.io.InvalidClassException;
 import java.time.LocalDate;
@@ -93,9 +95,8 @@ public class Main_ctr {
 
     private static ObservableList<Student> osl = FXCollections.observableArrayList();
     private static Collection<Student> students = new TreeSet<>();
-    private ArrayList<String> names = new ArrayList<>();
-    private ArrayList<Image> img = new ArrayList<>();   //Sample = 0 ... Max Mustermann = 1
-    private int imgctr;
+    private ArrayList<Image> img; //Sample = 0 ... Max Mustermann = 1
+    private int imgctr = 0;
     private Student curr_std = null;
 
     private file_IO file_io = new file_IO();
@@ -116,10 +117,35 @@ public class Main_ctr {
     };
 
     public void init() {
-        //Image Ressources
-        Image max = new Image(Main.class.getResourceAsStream("max.jpg"));
-        img.add(SampleStudent);
-        img.add(max);
+        //Load Image array if available
+        try {
+            if ((img = file_io.loadImg()) != null){
+                System.out.println("Loaded Image Array");
+
+                for (Image i:img) {
+                    imgctr++;
+                }
+            }
+        } catch (ClassNotFoundException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("File damaged!");
+            alert.setContentText("The file ./svw_img.bin appears to be damaged");
+            alert.setHeaderText("Damaged File!");
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText("The file \"./svw_img.bin\" not found!");
+            alert.setHeaderText("File not found!");
+        }
+
+        if (img == null) {
+             img = new ArrayList<>();
+            System.out.println(" No Image array found generating default array");
+            //Image Ressources
+            Image max = new Image(Main.class.getResourceAsStream("max.jpg"));
+            img.add(SampleStudent);
+            img.add(max);
+        }
 
 
         value_option.setItems(FXCollections.observableArrayList("First Name", "Last Name", "Username", "E-Mail", "School", "Class", "Date of Birth"));
@@ -130,7 +156,7 @@ public class Main_ctr {
         student_image.setImage(SampleStudent);
         //jaxrs!!!!
 
-        //Load Contents if available !!@TODO Get Reading to Work!! //Maby dont add students only to observable list
+        //Load Contents if available
         try {
             students.addAll(file_io.readLocal("./seas.bin"));
             osl.addAll(students);
@@ -174,6 +200,10 @@ public class Main_ctr {
 
             }
         });
+
+        for (Image i:img) {
+            imgctr++;
+        }
     }
 
     public void check4select(ActionEvent actionEvent) {
@@ -321,6 +351,7 @@ public class Main_ctr {
     public void savelocal() {
         try {
             file_io.writeLocal("./seas.bin",students);
+            file_io.saveImg(img);
             System.out.println("saved");
         } catch (IOException e) {
             e.printStackTrace();
@@ -372,8 +403,19 @@ public class Main_ctr {
 
     public void setCurrentImg(ActionEvent actionEvent) {
         if (curr_std != null) {
+            FileChooser fileChooser = new FileChooser();
+            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
             try {
+                fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+                File file = fileChooser.showOpenDialog(null);
 
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+
+                img.add(image);
+                imgctr++;
+                curr_std.setImg(imgctr);
             } catch (IOException e){
                 e.printStackTrace();
                 System.exit(0);
