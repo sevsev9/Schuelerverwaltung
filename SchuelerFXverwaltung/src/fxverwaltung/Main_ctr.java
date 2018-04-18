@@ -192,11 +192,15 @@ public class Main_ctr {
                 ch_class.setText(s.getClass_());
                 ch_date.setValue(LocalDate.of(1999,1,1));
 
-                if (img.get(s.getImg()) != null){
-                    student_image.setImage(img.get(s.getImg()));
-                } else {
-                    student_image.setImage(SampleStudent);
-                }
+        try {
+            if (img.get(s.getImg()) != null){
+                student_image.setImage(img.get(s.getImg()));
+            } else {
+                student_image.setImage(SampleStudent);
+            }
+        } catch (IndexOutOfBoundsException e) {
+            student_image.setImage(SampleStudent);
+        }
 
             }
         });
@@ -204,6 +208,7 @@ public class Main_ctr {
         for (Image i:img) {
             imgctr++;
         }
+        imgctr--;
     }
 
     public void check4select(ActionEvent actionEvent) {
@@ -419,6 +424,11 @@ public class Main_ctr {
             } catch (IOException e){
                 e.printStackTrace();
                 System.exit(0);
+            } catch (IllegalArgumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error");
+                alert.setContentText("No Image Selected!");
+                alert.showAndWait();
             }
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
