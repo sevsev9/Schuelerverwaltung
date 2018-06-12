@@ -10,7 +10,7 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Main_ctr ctr = new Main_ctr();
+        fxverwaltung.Main_ctr ctr = new fxverwaltung.Main_ctr();
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("main.fxml"));
         fxmlLoader.setController(ctr);
         Parent root = fxmlLoader.load();

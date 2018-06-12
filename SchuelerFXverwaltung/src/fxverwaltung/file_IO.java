@@ -85,24 +85,17 @@ public class file_IO {
     }
 
     public void saveImg(ArrayList<Image> img) throws IOException {
-        ArrayList<String> bi = new ArrayList<>();
+        ArrayList<BufferedImage> bi = new ArrayList<>();
 
         for (Image i:img) {
-            BufferedImage bimg = SwingFXUtils.fromFXImage(i,null);
-            bi.add(bimg);
-        }
-
-        try (
-                ObjectOutputStream out = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("svw_img")))
-        ){
-            out.defaultWriteObject();
-            out.writeInt(bi.size()); // how many images are serialized?
-            for (BufferedImage eachImage : bi) {
-                ImageIO.write(eachImage, "png", out); // png is lossless
+            File outputFile = new File("./res/");
+            BufferedImage bImage = SwingFXUtils.fromFXImage(i, null);
+            try {
+                ImageIO.write(bImage, "png", outputFile);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
         }
-
-
     }
 
     public ArrayList<Image> loadImg() throws IOException, ClassNotFoundException {
@@ -126,5 +119,15 @@ public class file_IO {
         }
 
         return img;
+    }
+
+    public static void saveToFile(Image image) {
+        File outputFile = new File("./res/");
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        try {
+            ImageIO.write(bImage, "png", outputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
