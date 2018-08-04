@@ -19,6 +19,12 @@
 
 .root {
     -fx-background-image: url("./background.jpg");
+    -webkit-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -moz-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -ms-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -o-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -khtml-fx-cursor: url('/fxverwaltung/Normal.ani');
+    fx-cursor: url('/fxverwaltung/Normal.ani');
 }
 
 .header {

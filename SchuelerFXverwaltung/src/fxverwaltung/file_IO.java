@@ -1,8 +1,12 @@
 package fxverwaltung;
 
+import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
 import java.io.*;
+import java.nio.Buffer;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -80,23 +84,50 @@ public class file_IO {
         return new Student(sc.next(),sc.next(),sc.next(),sc.next(), sc.next(), sc.next(), LocalDate.parse(sc.next()),sc.next());
     }
 
-    public ArrayList<Image> loadImg() throws IOException, ClassNotFoundException{
+    public void saveImg(ArrayList<Image> img) throws IOException {
+        ArrayList<BufferedImage> bi = new ArrayList<>();
+
+        for (Image i:img) {
+            File outputFile = new File("./res/");
+            BufferedImage bImage = SwingFXUtils.fromFXImage(i, null);
+            try {
+                ImageIO.write(bImage, "png", outputFile);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    public ArrayList<Image> loadImg() throws IOException, ClassNotFoundException {
+        ArrayList<BufferedImage> bi = new ArrayList<>();
         ArrayList<Image> img = new ArrayList<>();
 
         try (
-                ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream("svw_img.bin")))
-                ){
-                img = (ArrayList<Image>) ois.readObject();
+                ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("svw_img.bin")))
+        ){
+            in.defaultReadObject();
+            final int imageCount = in.readInt();
+            bi = new ArrayList<BufferedImage>(imageCount);
+            for (int i=0; i<imageCount; i++) {
+                bi.add(ImageIO.read(in));
+            }
+        }
+
+        for (BufferedImage i:bi) {
+            Image imag = SwingFXUtils.toFXImage(i,null);
+            img.add(imag);
         }
 
         return img;
     }
 
-    public void saveImg(ArrayList<Image> img) throws IOException{
-        try (
-                ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream("svw_img")))
-                ){
-                oos.writeObject(img);
+    public static void saveToFile(Image image) {
+        File outputFile = new File("./res/");
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        try {
+            ImageIO.write(bImage, "png", outputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }
