@@ -55,6 +55,7 @@ public class Main_ctr {
     public Label img_school;
     public Label img_class;
     public Label img_date;
+    public PasswordField pwd_passwd;
     private Image SampleStudent = new Image(Main.class.getResourceAsStream("sample_student.png"));
 
     //Menu Items
@@ -96,8 +97,8 @@ public class Main_ctr {
     private static ObservableList<Student> osl = FXCollections.observableArrayList();
     private static Collection<Student> students = new TreeSet<>();
     private ArrayList<Image> img; //Sample = 0 ... Max Mustermann = 1
-    private int imgctr = 0;
-    private Student curr_std = null;
+    private static int imgctr = 0;
+    private static Student curr_std = null;
 
     private file_IO file_io = new file_IO();
 
@@ -192,9 +193,13 @@ public class Main_ctr {
                 ch_class.setText(s.getClass_());
                 ch_date.setValue(LocalDate.of(1999,1,1));
 
-                if (img.get(s.getImg()) != null){
-                    student_image.setImage(img.get(s.getImg()));
-                } else {
+                try {
+                    if (img.get(s.getImg()) != null){
+                        student_image.setImage(img.get(s.getImg()));
+                    } else {
+                        student_image.setImage(SampleStudent);
+                    }
+                } catch (IndexOutOfBoundsException e) {
                     student_image.setImage(SampleStudent);
                 }
 
@@ -204,6 +209,7 @@ public class Main_ctr {
         for (Image i:img) {
             imgctr++;
         }
+        imgctr--;
     }
 
     public void check4select(ActionEvent actionEvent) {
@@ -376,19 +382,11 @@ public class Main_ctr {
     public void ch_pass(ActionEvent actionEvent) {
         if (curr_std != null) {
             try {
-                Parent root = FXMLLoader.load(getClass().getResource("./addstudent.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("./ch_pass.fxml"));
                 Stage stage = new Stage();
-                stage.setTitle("Set Student Image");
+                stage.setTitle("Change Password of Student " + curr_std.getFirst_name() + " " + curr_std.getLast_name() );
                 stage.setScene(new Scene(root));
                 stage.show();
-
-                pwd_fname.setText(curr_std.getFirst_name());
-                pwd_lname.setText(curr_std.getLast_name());
-                pwd_mail.setText(curr_std.getEmail());
-                pwd_uname.setText(curr_std.getUsername());
-                pwd_school.setText(curr_std.getSchool());
-                pwd_class.setText(curr_std.getClass_());
-                pwd_date.setText(curr_std.getDate().toString());
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(0);
@@ -426,5 +424,13 @@ public class Main_ctr {
             alert.setContentText("Please select a Student.");
             alert.showAndWait();
         }
+    }
+
+    public void setPasswd(ActionEvent actionEvent) {
+        curr_std.setPassword(pwd_passwd.getText());
+
+        Node src = (Node) actionEvent.getSource();
+        Stage stage = (Stage) src.getScene().getWindow();
+        stage.close();  //closes window
     }
 }
