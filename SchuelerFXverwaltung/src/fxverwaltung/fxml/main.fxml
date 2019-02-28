@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SeparatorMenuItem?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="523.0" prefWidth="782.0" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="523.0" prefWidth="782.0" style="-fx-background-color: grey;" styleClass="root" stylesheets="@../assets/css/fx.css">
+         <children>
+            <MenuBar layoutY="-1.0" prefHeight="25.0" prefWidth="785.0">
+              <menus>
+                <Menu mnemonicParsing="false" text="Data">
+                  <items>
+                    <MenuItem fx:id="menu_savetocsv" mnemonicParsing="false" onAction="#savetoCSV" text="Save as CSV" />
+                        <MenuItem fx:id="menu_savelocal" mnemonicParsing="false" onAction="#savelocal" text="Save to Local Storage" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="menu_appendfromCSV" mnemonicParsing="false" onAction="#read_append_CSV" text="Append from CSV" />
+                        <MenuItem fx:id="menu_overwritefromCSV" mnemonicParsing="false" onAction="#read_overwrite_CSV" text="Append from CSV" />
+                  </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                  <items>
+                    <MenuItem fx:id="btn_about" mnemonicParsing="false" onAction="#openabout" text="About" />
+                  </items>
+                </Menu>
+              </menus>
+            </MenuBar>
+            <ListView fx:id="student_table" layoutX="14.0" layoutY="148.0" onEditCancel="#check4select" onEditCommit="#check4select" onEditStart="#check4select" prefHeight="361.0" prefWidth="214.0" style="-fx-background-color: lightgrey;" />
+            <Label fx:id="student_label" alignment="CENTER" contentDisplay="CENTER" layoutX="14.0" layoutY="119.0" prefHeight="25.0" prefWidth="214.0" style="-fx-border-color: darkgray; -fx-border-width: 2px; -fx-background-color: lightgrey;" text="Students" textAlignment="CENTER" />
+            <ChoiceBox fx:id="value_option" layoutX="338.0" layoutY="113.0" prefWidth="150.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="search_bar" layoutX="497.0" layoutY="113.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: lightgrey;" />
+            <DatePicker fx:id="date_bar" layoutX="497.0" layoutY="113.0" prefHeight="25.0" prefWidth="174.0" style="-fx-background-color: lightgrey;" visible="false" />
+            <Button fx:id="search_button" layoutX="678.0" layoutY="108.0" mnemonicParsing="false" onAction="#search" stylesheets="@../assets/css/fx.css" text="Search" />
+            <Label alignment="CENTER" layoutX="524.0" layoutY="150.0" prefHeight="25.0" prefWidth="119.0" text="Optional:" textFill="#15b247">
+               <font>
+                  <Font name="System Bold" size="20.0" />
+               </font>
+            </Label>
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="184.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="First Name:" textAlignment="CENTER" />
+            <ImageView fx:id="headerimg" fitHeight="80.0" fitWidth="785.0" layoutX="-1.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" />
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="211.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="Last Name:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="238.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="E-Mail:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="265.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="Username:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="292.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="Class:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="319.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="School:" textAlignment="CENTER" />
+            <TextField fx:id="opt_fname" layoutX="614.0" layoutY="184.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="opt_lname" layoutX="614.0" layoutY="211.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="opt_email" layoutX="614.0" layoutY="238.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="opt_uname" layoutX="614.0" layoutY="265.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="opt_class" layoutX="614.0" layoutY="292.0" prefWidth="149.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="opt_school" layoutX="614.0" layoutY="319.0" style="-fx-background-color: lightgrey;" />
+            <DatePicker fx:id="opt_date" layoutX="614.0" layoutY="346.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: lightgrey;" />
+            <Label alignment="CENTER_RIGHT" layoutX="523.0" layoutY="346.0" prefHeight="25.0" prefWidth="85.0" style="-fx-text-fill: white;" text="Date of Birth:" textAlignment="CENTER" />
+            <Button fx:id="student_add" layoutX="669.0" layoutY="471.0" mnemonicParsing="false" onAction="#add_student" prefHeight="35.0" prefWidth="107.0" stylesheets="@../assets/css/fx.css" text="Add Student" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="276.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="First Name:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="303.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Last Name:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="329.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="E-Mail:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="358.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Username:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="384.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Class:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="411.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="School:" textAlignment="CENTER" />
+            <Label alignment="CENTER_RIGHT" layoutX="245.0" layoutY="438.0" prefHeight="25.0" prefWidth="79.0" style="-fx-text-fill: white;" text="Date of Birth:" textAlignment="CENTER" />
+            <ImageView fx:id="student_image" cache="true" cacheHint="QUALITY" fitHeight="113.0" fitWidth="150.0" layoutX="342.0" layoutY="153.0" mouseTransparent="true" pickOnBounds="true" preserveRatio="true" />
+            <TextField fx:id="ch_fname" layoutX="342.0" layoutY="276.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="ch_lname" layoutX="342.0" layoutY="303.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="ch_email" layoutX="342.0" layoutY="330.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="ch_uname" layoutX="342.0" layoutY="357.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="ch_class" layoutX="342.0" layoutY="384.0" prefWidth="149.0" style="-fx-background-color: lightgrey;" />
+            <TextField fx:id="ch_school" layoutX="342.0" layoutY="411.0" style="-fx-background-color: lightgrey;" />
+            <DatePicker fx:id="ch_date" layoutX="342.0" layoutY="438.0" prefHeight="25.0" prefWidth="150.0" style="-fx-background-color: lightgrey;" />
+            <Button fx:id="ch_save" layoutX="417.0" layoutY="471.0" mnemonicParsing="false" onAction="#ch_save" prefHeight="35.0" prefWidth="79.0" text="Save" />
+            <Button fx:id="ch_btn_pwd" layoutX="237.0" layoutY="471.0" mnemonicParsing="false" onAction="#ch_pass" prefHeight="35.0" prefWidth="141.0" text="Change Password" />
+            <Button fx:id="ch_setImg" layoutX="237.0" layoutY="233.0" mnemonicParsing="false" onAction="#setCurrentImg" text="Set Image" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

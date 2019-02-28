@@ -1,0 +1,67 @@
+.button {
+    -fx-background-color:
+            #090a0c,
+            linear-gradient(#38424b 0%, #1f2429 20%, #191d22 100%),
+            linear-gradient(#20262b, #191d22),
+            radial-gradient(center 50% 0%, radius 100%, rgba(114,131,148,0.9), rgba(255,255,255,0));
+    -fx-background-radius: 5,4,3,5;
+    -fx-background-insets: 0,1,2,0;
+    -fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+    -fx-font-family: "Arial";
+    -fx-text-fill: linear-gradient(white, #d0d0d0);
+    -fx-font-size: 12px;
+    -fx-padding: 10 20 10 20;
+}
+
+.button Text {
+    -fx-effect: dropshadow( one-pass-box , rgba(0,0,0,0.9) , 1, 0.0 , 0 , 1 );
+}
+
+.root {
+    -fx-background-image: url("./background.jpg");
+    -webkit-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -moz-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -ms-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -o-fx-cursor: url('/fxverwaltung/Normal.ani');
+    -khtml-fx-cursor: url('/fxverwaltung/Normal.ani');
+    fx-cursor: url('/fxverwaltung/Normal.ani');
+}
+
+.header {
+    -fx-font-size: 32px;
+    -fx-font-family: "Arial Black";
+    -fx-fill: #a4a4a4;
+    -fx-effect: innershadow( three-pass-box , rgba(0,0,0,0.7) , 6, 0.0 , 0 , 2 );
+}
+
+.adder_label {
+    -fx-font-size: 20px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #999999;
+    -fx-effect: dropshadow( gaussian , rgba(173, 0, 0, 0.5), 0,0,0,1 );
+}
+
+.menu-bar {
+    -fx-background-color: #007fa8;
+}
+
+.menu-item {
+    -fx-background-color: #222;
+    -fx-text-fill: lightgrey;
+}
+
+.menu-item:hover {
+    -fx-background-color: #3399B9;
+}
+
+.menu-item:pressed {
+    -fx-background-color: #004C65;
+}
+
+.context-menu {
+    -fx-background-color: #007fa8;
+}
+
+.root.popup {
+    -fx-background-color: transparent;
+}
