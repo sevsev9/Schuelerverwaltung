@@ -1,5 +1,6 @@
 package fxverwaltung;
 
+import fxverwaltung.data.Student;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
