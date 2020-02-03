@@ -98,24 +98,24 @@ public class file_IO {
     }
 
     public ArrayList<Image> loadImg() throws IOException, ClassNotFoundException {
-        ArrayList<BufferedImage> bi = new ArrayList<>();
-        ArrayList<Image> img = new ArrayList<>();
+            ArrayList<BufferedImage> bi = new ArrayList<>();
+            ArrayList<Image> img = new ArrayList<>();
 
-        try (
-                ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("svw_img.bin")))
-        ){
-            in.defaultReadObject();
-            final int imageCount = in.readInt();
-            bi = new ArrayList<BufferedImage>(imageCount);
-            for (int i=0; i<imageCount; i++) {
-                bi.add(ImageIO.read(in));
+            try (
+                    ObjectInputStream in = new ObjectInputStream(new BufferedInputStream(new FileInputStream("svw_img.bin")))
+            ){
+                in.defaultReadObject();
+                final int imageCount = in.readInt();
+                bi = new ArrayList<BufferedImage>(imageCount);
+                for (int i=0; i<imageCount; i++) {
+                    bi.add(ImageIO.read(in));
+                }
             }
-        }
 
-        for (BufferedImage i:bi) {
-            Image imag = SwingFXUtils.toFXImage(i,null);
-            img.add(imag);
-        }
+            for (BufferedImage i:bi) {
+                Image imag = SwingFXUtils.toFXImage(i,null);
+                img.add(imag);
+            }
 
         return img;
     }
